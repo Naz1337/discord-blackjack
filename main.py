@@ -25,9 +25,18 @@ async def add(ctx: commands.Context, a: int = commands.parameter(description='Th
     logging.info(f"{ctx.author} used add command: {answer}")
 
 
+async def on_ready():
+    global bot
+    logging.info(
+        f"Bot connected as {bot.user} (ID: {bot.user.id}), ready!")
+    logging.info("calling .sync on the bot tree")
+    await bot.tree.sync()
+
+
 def main():
     intents = discord.Intents.default()
     intents.message_content = True
+    global bot
     bot = commands.Bot(
         'p!', description="The bot that handle your blackjack games", intents=intents)
 
@@ -45,12 +54,6 @@ def main():
 
     bot.add_command(ping)
     bot.add_command(add)
-
-    async def on_ready():
-        logging.info(
-            f"Bot connected as {bot.user} (ID: {bot.user.id}), ready!")
-        logging.info("calling .sync on the bot tree")
-        await bot.tree.sync()
 
     bot.add_listener(on_ready, 'on_ready')
 
