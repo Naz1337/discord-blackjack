@@ -36,7 +36,7 @@ async def on_ready():
 def main():
     intents = discord.Intents.default()
     intents.message_content = True
-    global bot
+    global bot  # from now own, this will be main.bot if someone import this and run main()
     bot = commands.Bot(
         'p!', description="The bot that handle your blackjack games", intents=intents)
 
