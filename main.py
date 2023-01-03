@@ -39,18 +39,19 @@ async def on_ready():
 @commands.hybrid_command()
 @commands.is_owner()
 async def reload(ctx: commands.Context, target_cog: str = 'cogs.blackjack_cog'):
+    """This command is mainly used by the owner to reload blackjack extension"""
     await bot.reload_extension(target_cog)
     resp = f"reloaded {target_cog}"
     logging.info(resp)
-    await ctx.send(resp)
+    await ctx.send(resp, ephemeral=True)
 
 @reload.error
 async def reload_error(ctx: commands.Context, exception: Exception):
     logging.error(f"Fail to reload whatever it was trying to reload, {exception}")
     if isinstance(exception, commands.ExtensionNotFound):
-        await ctx.send("Extension does not exist")
+        await ctx.send("Extension does not exist", ephemeral=True)
     else:
-        await ctx.send(f"Error! {exception}")
+        await ctx.send(f"Error! {exception}", ephemeral=True)
 
 
 def main():

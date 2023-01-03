@@ -47,7 +47,7 @@ class BlackJack(commands.Cog):
 
             resp = f"Added ${amount} to {to}(${cash})"
 
-            await ctx.send(resp)
+            await ctx.send(resp, ephemeral=True)
             logger.info(resp)
 
 
