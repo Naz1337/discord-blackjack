@@ -29,8 +29,28 @@ async def on_ready():
     global bot
     logging.info(
         f"Bot connected as {bot.user} (ID: {bot.user.id}), ready!")
+    
+    logging.debug('loading extension blackjack_cog')
+    await bot.load_extension('cogs.blackjack_cog')
+    
     logging.info("calling .sync on the bot tree")
     await bot.tree.sync()
+
+@commands.hybrid_command()
+@commands.is_owner()
+async def reload(ctx: commands.Context, target_cog: str = 'cogs.blackjack_cog'):
+    await bot.reload_extension(target_cog)
+    resp = f"reloaded {target_cog}"
+    logging.info(resp)
+    await ctx.send(resp)
+
+@reload.error
+async def reload_error(ctx: commands.Context, exception: Exception):
+    logging.error(f"Fail to reload whatever it was trying to reload, {exception}")
+    if isinstance(exception, commands.ExtensionNotFound):
+        await ctx.send("Extension does not exist")
+    else:
+        await ctx.send(f"Error! {exception}")
 
 
 def main():
@@ -54,6 +74,7 @@ def main():
 
     bot.add_command(ping)
     bot.add_command(add)
+    bot.add_command(reload)
 
     bot.add_listener(on_ready, 'on_ready')
 
