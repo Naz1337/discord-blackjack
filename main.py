@@ -1,5 +1,7 @@
 import os
 import logging
+from logging.handlers import QueueHandler, QueueListener
+from queue import Queue
 
 import discord
 from discord.ext import commands
@@ -67,8 +69,13 @@ def main():
         '[{asctime}] [{levelname:<8}] {name}: {message}', dt_fmt, style='{')
     file_handler = logging.FileHandler('logs.txt')
     file_handler.setFormatter(formatter)
-    file_handler.setLevel(logging.DEBUG)
-    logger.addHandler(file_handler)
+
+    log_queue = Queue(0)
+    queue_handler = QueueHandler(log_queue)
+    listener = QueueListener(log_queue, file_handler)
+
+    logger.addHandler(queue_handler)
+    listener.start()
 
     load_dotenv()
     token = os.environ.get('dsc_key')
@@ -81,6 +88,8 @@ def main():
 
     # run setup the console formatting logging stuff
     bot.run(token, log_level=logging.INFO, root_logger=True)
+
+    listener.stop()
 
 
 if __name__ == "__main__":
