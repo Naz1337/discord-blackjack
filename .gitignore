@@ -3,3 +3,4 @@ venv/
 logs.txt
 */__pycache__/
 .vscode/
+db
