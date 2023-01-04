@@ -77,3 +77,4 @@ class BlackJack(commands.Cog):
 async def setup(bot: commands.Bot):
     blackjack_cog = BlackJack()
     await bot.add_cog(blackjack_cog)
+    await bot.tree.sync()
