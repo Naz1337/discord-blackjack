@@ -25,7 +25,7 @@ Then, the script will be able to access the bot token by looking for the `dsc_ke
 
 > make that the bot can create session and player can join and also i guess... make it that when there are no player, close down the session
 
-2.  - [ ]make player can place bet
+2.  - [ ] make player can place bet
 
     give player time to place bet... dont start dealing the card for a certain time?
     
