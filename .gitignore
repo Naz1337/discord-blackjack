@@ -1,6 +1,8 @@
 venv/
 .env
 logs.txt
-*/__pycache__/
+*/__pycache__
+*.pyc
 .vscode/
 blackjack.db
+__pycache__
