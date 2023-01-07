@@ -35,3 +35,6 @@ class Deck:
     
     def shuffle_card(self):
         random.shuffle(self.cards)
+    
+    def __len__(self):
+        return len(self.cards)
