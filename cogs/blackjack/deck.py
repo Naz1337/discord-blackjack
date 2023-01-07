@@ -38,3 +38,6 @@ class Deck:
     
     def __len__(self):
         return len(self.cards)
+    
+    def take_card(self):
+        return self.cards.pop()

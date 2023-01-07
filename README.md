@@ -23,7 +23,7 @@ Then, the script will be able to access the bot token by looking for the `dsc_ke
 
 1. - [ ] build the blackjack session
 
-> make that the bot can create session and player can join and also i guess... make it that when there are no player, close down the session
+> ~~make that the bot can create session and player can join and also i guess... make it that when there are no player, close down the session~~ to join a blackjack session, do /bet \[amount\], but still working on it!
 
 2.  - [ ] make player can place bet
 
